@@ -1,0 +1,158 @@
+timeshift (22.11.2-1kaisen) kaisen-packages; urgency=medium
+
+  * Add a patch to not display the log message
+    "btrfs: Quotas are not enabled"
+
+ -- Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>  Sat, 01 Apr 2023 14:10:04 +0100
+
+timeshift (22.11.2-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+
+ -- Boyuan Yang <byang@debian.org>  Wed, 11 Jan 2023 20:43:46 -0500
+
+timeshift (22.11.1-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+
+ -- Boyuan Yang <byang@debian.org>  Wed, 23 Nov 2022 16:58:42 -0500
+
+timeshift (22.06.5-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Steve Meliza <swm@swm1.com>  Mon, 25 Jul 2022 19:09:14 -0700
+
+timeshift (22.06.4-1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream release. (Closes: #1014891)
+
+ -- Boyuan Yang <byang@debian.org>  Wed, 20 Jul 2022 14:32:39 -0400
+
+timeshift (22.06.1-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Switch to linuxmint upstream. (Closes: #1012265) (LP: #1976627)
+  * d/control,d/rules,d/u/metadata: Switch upstream info.
+  * New upstream version 22.06.1.
+  * debian/: Apply wrap-and-sort -abst.
+  * debian/control: Bump Standards-Version to 4.6.1.
+  * debian/control: Add new dependency cron-daemon. (Closes: #1012596)
+  * Add new build-dep libxapp-dev.
+
+ -- Boyuan Yang <byang@debian.org>  Sun, 12 Jun 2022 19:46:42 -0400
+
+timeshift (21.09.1-1) unstable; urgency=medium
+
+  * New upstream version 21.09.1
+  * Remove debian/patches/d43..patch, already merged by upstream.
+
+ -- Yanhao <yanhaocs@gmail.com>  Sat, 02 Oct 2021 00:11:18 +0800
+
+timeshift (20.11.1-1.1) unstable; urgency=high
+
+  * Non-maintainer upload.
+  * Refresh packaging:
+    + Bump Standards-Version to 4.6.0.
+    + Bump debhelper-compat to v13.
+  * debian/control:
+    + Use github repo as homepage since original homepage is not working.
+    + Add Breaks: util-linux (<< 2.37.2~) due to #992921.
+  * debian/patches/d437..patch: Add upstream patch to fix compatibility
+    with new util-linux. (Closes: #992921)
+  * debian/rules: Remove broken upstream-provided man page before
+    dh_installman (required by debhelper compat v13).
+
+ -- Boyuan Yang <byang@debian.org>  Wed, 25 Aug 2021 14:21:02 -0400
+
+timeshift (20.11.1-1) unstable; urgency=medium
+
+  * New upstream version 20.11.1
+  * Remove some patches that are no longer fit.
+
+ -- Yanhao Mo <yanhaocs@gmail.com>  Sat, 09 Jan 2021 17:47:15 +0800
+
+timeshift (20.03+ds-3) unstable; urgency=medium
+
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository.
+  * Upstream translation fixes
+  * d/patches: Add a patch to remove gvfs-trash dependency (Closes: #969773)
+  * debian: Add missing man pages
+  * debian/timeshift.appdata.xml:
+    + Fix AppStream warnings
+
+ -- Steve Meliza <swm@swm1.com>  Fri, 30 Oct 2020 17:17:03 -0700
+
+timeshift (20.03+ds-2) unstable; urgency=medium
+
+  * debian/patches:
+    + Add $(VALAFLAGS) to valac call to fix lintian
+      hardening-no-bindnow.
+    + Fix lintian desktop-entry-lacks-keywords-entry.
+  * debian/copyright:
+    + Fix lintian missing-explanation-for-repacked-upstream-tarball.
+  * debian/timeshift.appdata.xml:
+    + Add <launchable> tag to fix AppStream metadata issue.
+  * debian/control: Add Rules-Requires-Root.
+  * debian/upstream/metadata: Added upstream metadata.
+
+ -- Steve Meliza <swm@swm1.com>  Sun, 15 Mar 2020 12:16:40 -0700
+
+timeshift (20.03+ds-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * debian/control:
+    + Update Vcs-* fields and use git packaging repo under Salsa
+      Debian Group.
+  * debian/README.Debian: Removed, no longer applicable.
+
+ -- Boyuan Yang <byang@debian.org>  Fri, 13 Mar 2020 13:49:57 -0400
+
+timeshift (20.03+ds-1) unstable; urgency=high
+
+  * New upstream version (Closes: #951302)
+  * d/control: Update homepage URL (Closes: #952690)
+
+ -- Steve Meliza <swm@swm1.com>  Sun, 08 Mar 2020 14:12:47 -0700
+
+timeshift (19.01+ds-2.1) unstable; urgency=high
+
+  * Non-maintainer upload
+  * d/patches: Add a patch to fix FTBFS (Closes: #948130)
+
+ -- Steve Meliza <swm@swm1.com>  Mon, 17 Feb 2020 22:33:00 -0800
+
+timeshift (19.01+ds-2) unstable; urgency=medium
+
+  * d/control: Add missing dependency: psmisc (Closes: #919760).
+
+ -- Yanhao Mo <yanhaocs@gmail.com>  Thu, 28 Feb 2019 12:03:15 +0800
+
+timeshift (19.01+ds-1) unstable; urgency=medium
+
+  * New upstream version 19.01+ds
+  * d/patches: Add a patch to fix FTBFS (Closes: #921762),
+    and some trivial updates.
+  * d/control: Using debhelper-compat (= 12).
+  * Bump Standards-Version to 4.3.0 (no changes needed).
+  * d/compat: Removed.
+  * Remove d/timeshift.appdata.xml, get rid of lintian warning:
+    inconsistent-appstream-metadata-license .
+
+ -- Yanhao Mo <yanhaocs@gmail.com>  Mon, 28 Jan 2019 13:46:04 +0800
+
+timeshift (18.9+ds-2) unstable; urgency=medium
+
+  * Fix d/watch.
+  * Workaround valac hardening issues.
+
+ -- Yanhao Mo <yanhaocs@gmail.com>  Fri, 04 Jan 2019 15:06:42 +0800
+
+timeshift (18.9+ds-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #908002)
+
+ -- Yanhao Mo <yanhaocs@gmail.com>  Wed, 05 Sep 2018 12:51:11 +0800

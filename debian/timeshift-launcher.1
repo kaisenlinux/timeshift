@@ -1,0 +1,156 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" (C) Copyright 2020 Tony George <teejeetech@gmail.com>,
+.\"
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH TIMESHIFT-LAUNCHER 1 "March  8 2020"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+timeshift-launcher \- a system restore utility
+.SH SYNOPSIS
+.B timeshift
+.RI --check
+.br
+.B timeshift
+.RI --create [OPTIONS]
+.br
+.B timeshift
+.RI --restore [OPTIONS]
+.br
+.B timeshift
+.RI --delete-[all] [OPTIONS]
+.br
+.B timeshift
+.RI --list-{snapshots|devices} [OPTIONS]
+.br
+.SH DESCRIPTION
+.B timeshift
+is a system restore utility which takes snapshots
+of the system at regular intervals. These snapshots can be restored
+at a later date to undo system changes. Creates incremental snapshots
+using rsync or BTRFS snapshots using BTRFS tools.
+.SH OPTIONS
+A summary of options is included below.
+.TP
+List:
+.br
+.B \-\-list[-snapshots]
+List snapshots.
+.br
+.B \-\-list-devices
+List devices.
+.TP
+Backup:
+.br
+.B \-\-check
+Create snapshot if scheduled.
+.br
+.B \-\-create
+Create snapshot (even if not scheduled).
+.br
+.B \-\-comments <string>
+Set snapshot description.
+.br
+.B \-\-tags {O,B,H,D,W,M}
+Add tags to snapshot (default: O).
+.TP
+Restore:
+.br
+.B \-\-restore
+Restore snapshot.
+.br
+.B \-\-clone
+Clone current system.
+.br
+.B \-\-snapshot <name>
+Specify snapshot to restore.
+.br
+.B \-\-target[-device] <device>
+Specify target device.
+.br
+.B \-\-grub[-device] <device>
+Specify device for installing GRUB2 bootloader.
+.br
+.B \-\-skip-grub
+Skip GRUB2 reinstall.
+.TP
+Delete:
+.br
+.B \-\-delete
+Delete snapshot.
+.br
+.B \-\-delete-all
+Delete all snapshots.
+.TP
+Global:
+.br
+.B \-\-snapshot-device <device>
+Specify backup device (default: config).
+.br
+.B \-\-yes
+Answer YES to all confirmation prompts.
+.br
+.B \-\-btrfs
+Switch to BTRFS mode (default: config).
+.br
+.B \-\-rsync
+Switch to RSYNC mode (default: config).
+.br
+.B \-\-debug
+Show additional debug messages.
+.br
+.B \-\-verbose
+Show rsync output (default).
+.br
+.B \-\-quiet
+Hide rsync output.
+.br
+.B \-\-scripted
+Run in non-interactive mode.
+.br
+.B \-\-help
+Show all options.
+.br
+.SH EXAMPLES
+.br
+timeshift --list
+.br
+timeshift --list --snapshot-device /dev/sda1
+.br
+timeshift --create --comments "after update" --tags D
+.br
+timeshift --restore 
+.br
+timeshift --restore --snapshot '2014-10-12_16-29-08' --target /dev/sda1
+.br
+timeshift --delete  --snapshot '2014-10-12_16-29-08'
+.br
+timeshift --delete-all
+.br
+.SH NOTES
+.br
+1) --create will always create a new snapshot
+.br
+2) --check will create a snapshot only if a scheduled snapshot is due
+.br
+3) Use --restore without other options to select options interactively
+.br
+4) UUID can be specified instead of device name
+.br
+5) Default values will be loaded from app config if options are not specified
+.br
+.SH AUTHOR
+.br
+Written by Tony George.

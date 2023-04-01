@@ -1,0 +1,37 @@
+Source: timeshift
+Section: utils
+Priority: optional
+Maintainer: Yanhao Mo <yanhaocs@gmail.com>
+Uploaders:
+ Steve Meliza <swm@swm1.com>,
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13),
+ libgee-0.8-dev,
+ libgtk-3-dev,
+ libjson-glib-dev,
+ libvte-2.91-dev,
+ libxapp-dev,
+ valac,
+Standards-Version: 4.6.1
+Homepage: https://github.com/linuxmint/timeshift
+Vcs-Git: https://salsa.debian.org/debian/timeshift.git
+Vcs-Browser: https://salsa.debian.org/debian/timeshift
+
+Package: timeshift
+Architecture: any
+Depends:
+ cron-daemon | cron,
+ psmisc,
+ rsync,
+ ${misc:Depends},
+ ${shlibs:Depends},
+Breaks:
+ util-linux (<< 2.37.2~),
+Replaces:
+ timeshift-btrfs,
+Description: System restore utility
+ Timeshift is a system restore utility which takes snapshots
+ of the system at regular intervals. These snapshots can be restored
+ at a later date to undo system changes. Creates incremental snapshots
+ using rsync or BTRFS snapshots using BTRFS tools.

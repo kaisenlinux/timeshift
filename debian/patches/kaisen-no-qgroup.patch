@@ -1,0 +1,35 @@
+Author: Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>
+
+--- timeshift-22.11.2.orig/src/Core/Main.vala
++++ timeshift-22.11.2/src/Core/Main.vala
+@@ -4108,8 +4108,8 @@ public class Main : GLib.Object{
+ 
+ 			if (ret_val != 0){
+ 				if (std_err.contains("not enabled")) {
+-					log_msg("btrfs: Quotas are not enabled");
+-					return false;
++					//log_msg("");
++					return true;
+ 				}
+ 				log_error (std_err);
+ 				log_error(_("btrfs returned an error") + ": %d".printf(ret_val));
+--- timeshift-22.11.2.orig/src/Core/Subvolume.vala
++++ timeshift-22.11.2/src/Core/Subvolume.vala
+@@ -168,14 +168,14 @@ public class Subvolume : GLib.Object{
+ 
+ 		if (App.btrfs_qgroups_enabled) {
+ 			if ((id > 0) && (repo != null)){
+-				log_msg("%s: 0/%ld".printf(_("Destroying qgroup"), id));
++				//log_msg("%s: 0/%ld".printf(_(""), id));
+ 
+ 				cmd = "btrfs qgroup destroy 0/%ld '%s'".printf(id, repo.mount_paths[name]);
+ 				log_debug(cmd);
+ 				ret_val = exec_sync(cmd, out std_out, out std_err);
+ 				if (ret_val != 0){
+-					log_error(_("Failed to destroy qgroup") + ": '0/%ld'".printf(id));
+-					return false;
++					//log_error(_("") + ": '0/%ld'".printf(id));
++					return true;
+ 				}
+ 
+ 				log_msg("%s: 0/%ld\n".printf(_("Destroyed qgroup"), id));
