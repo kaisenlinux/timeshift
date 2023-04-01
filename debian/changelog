@@ -1,3 +1,9 @@
+timeshift (22.11.2-2kaisen) kaisen-packages; urgency=medium
+
+  * Remove the /usr/share/applications folder
+
+ -- Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>  Sat, 01 Apr 2023 16:18:07 +0100
+
 timeshift (22.11.2-1kaisen) kaisen-packages; urgency=medium
 
   * Add a patch to not display the log message

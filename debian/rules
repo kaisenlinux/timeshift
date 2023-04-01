@@ -13,9 +13,10 @@ export VALAFLAGS:=$(foreach w,$(CPPFLAGS) $(CFLAGS) $(LDFLAGS),-X $(w))
 
 # Remove broken upstream-installed man page
 execute_before_dh_installman:
-	rm -f debian/timeshift/usr/share/man/man1/timeshift.1*
+	rm -f $(CURDIR)/debian/timeshift/usr/share/man/man1/timeshift.1*
 
 execute_after_dh_auto_install:
-	rm -rf debian/timeshift/usr/share/man/man1
-	rmdir debian/timeshift/usr/share/man
-	rm -f debian/timeshift/usr/bin/timeshift-uninstall
+	rm -rf $(CURDIR)/debian/timeshift/usr/share/man/man1
+	rmdir $(CURDIR)/debian/timeshift/usr/share/man
+	rm -f $(CURDIR)/debian/timeshift/usr/bin/timeshift-uninstall
+	rm -rf $(CURDIR)/debian/timeshift/usr/share/applications
