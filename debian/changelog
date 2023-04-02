@@ -1,3 +1,9 @@
+timeshift (22.11.2-3kaisen) kaisen-packages; urgency=medium
+
+  * Update the control file
+
+ -- Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>  Sun, 02 Apr 2023 19:55:41 +0100
+
 timeshift (22.11.2-2kaisen) kaisen-packages; urgency=medium
 
   * Remove the /usr/share/applications folder

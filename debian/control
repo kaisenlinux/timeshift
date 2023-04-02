@@ -1,9 +1,8 @@
 Source: timeshift
 Section: utils
 Priority: optional
-Maintainer: Yanhao Mo <yanhaocs@gmail.com>
-Uploaders:
- Steve Meliza <swm@swm1.com>,
+XSBC-Original-Maintainer: Yanhao Mo <yanhaocs@gmail.com>
+Maintainer: Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>
 Rules-Requires-Root: no
 Build-Depends:
  debhelper-compat (= 13),
@@ -15,8 +14,8 @@ Build-Depends:
  valac,
 Standards-Version: 4.6.1
 Homepage: https://github.com/linuxmint/timeshift
-Vcs-Git: https://salsa.debian.org/debian/timeshift.git
-Vcs-Browser: https://salsa.debian.org/debian/timeshift
+Vcs-Git: https://gitlab.com/kaisenlinux/packages/timeshift.git
+Vcs-Browser: https://gitlab.com/kaisenlinux/packages/timeshift
 
 Package: timeshift
 Architecture: any
