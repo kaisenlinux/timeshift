@@ -4,19 +4,8 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
 export DEB_LDFLAGS_MAINT_APPEND =
 
-DPKG_EXPORT_BUILDFLAGS = 1
-include /usr/share/dpkg/buildflags.mk
-export VALAFLAGS:=$(foreach w,$(CPPFLAGS) $(CFLAGS) $(LDFLAGS),-X $(w))
-
 %:
 	dh $@
 
-# Remove broken upstream-installed man page
-execute_before_dh_installman:
-	rm -f $(CURDIR)/debian/timeshift/usr/share/man/man1/timeshift.1*
-
 execute_after_dh_auto_install:
-	rm -rf $(CURDIR)/debian/timeshift/usr/share/man/man1
-	rmdir $(CURDIR)/debian/timeshift/usr/share/man
-	rm -f $(CURDIR)/debian/timeshift/usr/bin/timeshift-uninstall
 	rm -rf $(CURDIR)/debian/timeshift/usr/share/applications

@@ -1,3 +1,44 @@
+timeshift (24.01.1-1kaisen) kaisen-packages; urgency=medium
+
+  * Import the new upstream release
+  * Add a new default conf including:
+    - BTRFS by default
+    - No run in first mode
+    - Backup /home partition by default
+    - Do not restore /home partition by default
+
+ -- Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>  Sat, 20 Apr 2023 16:08:39 +0100
+
+timeshift (24.01.1-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version 24.01.1.
+
+ -- Boyuan Yang <byang@debian.org>  Wed, 10 Jan 2024 16:20:48 -0500
+
+timeshift (23.12.1-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version 23.12.1.
+  * debian/patches/: Dropped, merged upstream.
+
+ -- Boyuan Yang <byang@debian.org>  Tue, 19 Dec 2023 17:27:22 -0500
+
+timeshift (23.07.1-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version 23.07.1.
+  * debian/timeshift.appdata.xml: Checkout upstream version.
+  * debian/rules: Switch to meson build system.
+  * debian/timeshift.manpages: Do not install debian custom
+    man page for now.
+  * debian/patches/: Drop old patches, not needed.
+  * debian/patches/0001-help2man: Add -N option to disable info pages.
+  * debian/timeshift.manpages: Prefer upstream man pages, except
+    timeshift-launcher.1 which is not provided by upstream.
+
+ -- Boyuan Yang <byang@debian.org>  Mon, 24 Jul 2023 23:07:05 -0400
+
 timeshift (22.11.2-3kaisen) kaisen-packages; urgency=medium
 
   * Update the control file

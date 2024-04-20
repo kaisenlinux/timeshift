@@ -1,13 +1,11 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: timeshift
-Upstream-Contact: Tony George <teejeetech@gmail.com>
-Source: https://github.com/teejee2008/timeshift
-Comment: Upstream repackaged due to numerous incompatibilities with
- Debian's packaging policies. Upstream author is targeting Mint.
+Upstream-Contact: https://github.com/linuxmint/timeshift/issues
+Source: https://github.com/linuxmint/timeshift
 
 Files: *
 Copyright: Tony George <tony.george.kol@gmail.com>
-License: GPL-3+
+License: GPL-2.0-or-later
 
 Files: debian/timeshift.appdata.xml
 Copyright: Tony George <tony.george.kol@gmail.com>
@@ -16,16 +14,15 @@ License: CC-BY-SA-3.0
 Files: src/Utility/*.vala
        src/Utility/Gtk/*.vala
        src/Gtk/*.vala
-       src/Console/*.vala
        src/Core/*.vala
 Copyright: 2012-2018, 2016 Tony George <tony.george.kol@gmail.com>
-License: GPL-2+
+License: GPL-2.0-or-later
 
 Files: po/*
 Copyright: 2017, Rosetta Contributors and Canonical Ltd
-License: GPL-2+
+License: GPL-2.0-or-later
 
-License: GPL-2+
+License: GPL-2.0-or-later
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 2 of the License, or
@@ -41,23 +38,6 @@ License: GPL-2+
  .
  On Debian systems, the complete text of the GNU General
  Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
-
-License: GPL-3+
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- .
- This package is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- .
- You should have received a copy of the GNU General Public License
- along with this program. If not, see <https://www.gnu.org/licenses/>.
- .
- On Debian systems, the complete text of the GNU General
- Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 
 License: CC-BY-SA-3.0
  THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE LAW. ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS LICENSE OR COPYRIGHT LAW IS PROHIBITED.

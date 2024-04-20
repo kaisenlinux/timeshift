@@ -168,6 +168,8 @@ public class Main : GLib.Object{
 	public string encrypted_home_dirs = "";
 	public bool encrypted_home_warning_shown = false;
 
+    private int _live_system = -1;
+
 	public string encrypted_private_dirs = "";
 	public bool encrypted_private_warning_shown = false;
 
@@ -185,7 +187,7 @@ public class Main : GLib.Object{
 
 	public Main(string[] args, bool gui_mode){
 		
-		this.mount_point_app = "/run/timeshift/%lld".printf(Posix.getpid());
+		this.mount_point_app = "/run/timeshift/%d".printf(Posix.getpid());
 		dir_create(this.mount_point_app);
 		
 		parse_some_arguments(args);
@@ -285,7 +287,7 @@ public class Main : GLib.Object{
 		this.share_folder = "/usr/share";
 		this.app_conf_path = "/etc/timeshift/timeshift.json";
 		this.app_conf_path_old = "/etc/timeshift.json";
-		this.app_conf_path_default = "/etc/timeshift/default.json";
+		this.app_conf_path_default = GLib.Path.build_path (GLib.Path.DIR_SEPARATOR_S, Constants.SYSCONFDIR, "timeshift", "default.json");
 		//sys_root and sys_home will be initialized by update_partition_list()
 		
 		// check if running locally ------------------------
@@ -949,10 +951,21 @@ public class Main : GLib.Object{
 		}
 	}
 
-	public bool live_system(){
-		//return true;
-		return (sys_root == null);
-	}
+    public bool live_system(){
+        /* Initialize once block */
+        if (_live_system == -1) {
+            var cmdline = file_read("/proc/cmdline");
+
+            if (cmdline.contains("boot=casper") || cmdline.contains("boot=live")) {
+                log_msg ("Live Session detected, backup is disabled.");
+                _live_system = 1;
+            } else {
+                _live_system = 0;
+            }
+        }
+
+        return (_live_system == 1);
+    }
 
 	// backup
 
@@ -1742,7 +1755,7 @@ public class Main : GLib.Object{
 		try {
 			thread_delete_running = true;
 			thread_delete_success = false;
-			Thread.create<void> (delete_thread, true);
+			new Thread<void>.try ("delete", () => {delete_thread();});
 
 			//new Thread<bool> ("", delete_thread);
 
@@ -2226,13 +2239,13 @@ public class Main : GLib.Object{
 			thr_success = false;
 			
 			if (btrfs_mode){
-				Thread.create<bool> (restore_execute_btrfs, true);
+				new Thread<bool>.try ("restore-execute-btrfs", () => {restore_execute_btrfs(); return true;});
 			}
 			else{
-				Thread.create<bool> (restore_execute_rsync, true);
+				new Thread<bool>.try ("restore-execute-rsync", () => {restore_execute_rsync(); return true;});
 			}
 		}
-		catch (ThreadError e) {
+		catch (Error e) {
 			thread_restore_running = false;
 			thr_success = false;
 			log_error (e.message);
@@ -3268,6 +3281,10 @@ public class Main : GLib.Object{
 				file_move(app_conf_path_old, app_conf_path);
 			}
 			else if (file_exists(app_conf_path_default)){
+				// /etc/timeshift might not pre-exist when sysconfdir is not /etc
+				if (!dir_exists(file_parent(app_conf_path))){
+					dir_create(file_parent(app_conf_path));
+				}
 				// copy default file
 				file_copy(app_conf_path_default, app_conf_path);
 			}
@@ -3433,10 +3450,10 @@ public class Main : GLib.Object{
 			// find devices from uuid
 			Device dev = null;
 			Device dev_parent = null;
-			if (backup_uuid.length > 0){
+			if (backup_uuid != null && backup_uuid.length > 0){
 				dev = Device.get_device_by_uuid(backup_uuid);
 			}
-			if (backup_parent_uuid.length > 0){
+			if (backup_parent_uuid != null && backup_parent_uuid.length > 0){
 				dev_parent = Device.get_device_by_uuid(backup_parent_uuid);
 			}
 
@@ -3842,8 +3859,8 @@ public class Main : GLib.Object{
 		try {
 			thread_estimate_running = true;
 			thr_success = false;
-			Thread.create<void> (estimate_system_size_thread, true);
-		} catch (ThreadError e) {
+			new Thread<void>.try ("estimate-system-size", () => {estimate_system_size_thread();});
+		} catch (Error e) {
 			thread_estimate_running = false;
 			thr_success = false;
 			log_error (e.message);
@@ -3964,8 +3981,8 @@ public class Main : GLib.Object{
 		try {
 			thread_subvol_info_running = true;
 			thread_subvol_info_success = false;
-			Thread.create<void> (query_subvolume_info_thread, true);
-		} catch (ThreadError e) {
+			new Thread<void>.try ("query-subvolume-info", () => {query_subvolume_info_thread();});
+		} catch (Error e) {
 			thread_subvol_info_running = false;
 			thread_subvol_info_success = false;
 			log_error (e.message);

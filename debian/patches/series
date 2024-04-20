@@ -1,5 +1,2 @@
-0003-Remove-Mime-Type-record-form-timeshift-gtk.desktop.patch
-0005-build-with-debug-info.patch
-0006-Add_keywords_to_dot_desktop.patch
-0007-Add_VALAFLAGS_to_makefile.patch
 kaisen-no-qgroup.patch
+kaisen-configuration.patch
