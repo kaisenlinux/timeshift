@@ -1,3 +1,14 @@
+timeshift (24.01.1-2kaisen) kaisen-packages; urgency=medium
+
+  * Update the default conffile to only include the following configurations:
+    - BTRFS by default
+    - No run in first mode
+  * Drop the kaisen-configuration.patch
+  * Use the debian/timeshift.json file as conffile instead of the quilt patch
+  * Add the default.json conffile
+
+ -- Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>  Fri, 24 May 2024 15:18:24 +0200
+
 timeshift (24.01.1-1kaisen) kaisen-packages; urgency=medium
 
   * Import the new upstream release
