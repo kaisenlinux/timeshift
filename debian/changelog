@@ -1,3 +1,9 @@
+timeshift (24.06.3-1kaisen) kaisen-packages; urgency=medium
+
+  * Import the new upstream release
+
+ -- Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>  Sun, 18 Aug 2024 01:22:04 +0200
+
 timeshift (24.01.1-2kaisen) kaisen-packages; urgency=medium
 
   * Update the default conffile to only include the following configurations:
