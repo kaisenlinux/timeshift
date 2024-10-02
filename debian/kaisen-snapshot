@@ -1,0 +1,90 @@
+#!/bin/bash
+
+GREEN='\e[1;32m'
+RED='\e[1;31m'
+RESET_COLOR='\033[0m'
+DEVICE=$(grep -v '#' /etc/fstab | grep -w / | grep -w subvol=@ | cut -d ' ' -f1 | cut -d '=' -f2)
+
+if [[ "$EUID" -ne 0 ]]; then
+	echo -e $RED "Run this script as root or with the sudo command to continue." $RESET_COLOR
+	exit 1
+fi
+
+if ! command -v timeshift > /dev/null; then
+	echo -e $RED "The timeshift command was not found. You can try to install it with the \e[0;33mapt install timeshift\e[1;31m command." $RESET_COLOR
+	exit 1
+fi
+
+help() {
+echo -e "\e[1;32mKaisen Linux Timeshift snapshot wrapper
+
+\e[0;33mUSAGE
+	\e[1;35mCreate a snapshot with the default snapshot message (Perso)\e[0;33m: \e[1;36mkaisen-snapshot \e[1;35m-c
+        \e[1;35mCreate a snapshot with your own snapshot message\e[0;33m: \e[1;36mkaisen-snapshot \e[1;35m-c\e[0;33m \e[1;35m-m\e[0;33m \e[1;36msnapshot_message
+	\e[1;35mList all snapshots\e[0;33m: \e[1;36mkaisen-snapshot \e[1;35m-l
+        \e[1;35mDelete a snapshot\e[0;33m: \e[1;36mkaisen-snapshot \e[1;35m-d
+        \e[1;35mDelete all snapshots\e[0;33m: \e[1;36m kaisen-snapshot \e[1;35m-a\e[0;33m
+
+\e[0;33mEXPLAINATION
+	Arguments can be used with this script:
+	\e[1;35m-h\e[0;33m|\e[1;35m--help\e[0;33m: Display help
+	\e[1;35m-c\e[0;33m|\e[1;35m--create\e[0;33m: Create a snapshot
+	\e[1;35m-m\e[0;33m|\e[1;35m--message\e[0;33m: Add a custom message for a snapshot (must be used with the -c or --create option)
+	\e[1;35m-l\e[0;33m|\e[1;35m--list\e[0;33m: List all snapshots
+	\e[1;35m-d\e[0;33m|\e[1;35m--delete\e[0;33m: Delete a snapshot (will display the list of snapshots to select the snapshot to be deleted)
+	\e[1;35m-a\e[0;33m|\e[1;35m--delete-all\e[0;33m: Delete all snapshots (all snapshots will be automatically deleted)
+
+EXAMPLES
+	To create a snapshot with the default snapshot message: \e[1;36mkaisen-snapshot \e[1;35m-c\e[0;33m
+	To create a snapshot with your own snapshot message: \e[1;36mkaisen-snapshot \e[1;35m-c\e[0;33m \e[1;35m-m\e[0;33m \e[1;36m"My_message" \e[0;33mor \e[1;36mkaisen-snapshot \e[1;35m-m\e[0;33m \e[1;36m"My_message" \e[1;35m-c\e[0;33m
+	To list all snapshots: \e[1;36mkaisen-snapshot \e[1;35m-l\e[0;33m
+	To delete a snapshot: \e[1;36mkaisen-snapshot \e[1;35m-d\e[0;33m
+	To delete all snapshots: \e[1;36m kaisen-snapshot \e[1;35m-a\e[0;33m
+"
+}
+
+create() {
+if [ -z "${MESSAGE}" ]; then
+	MESSAGE="Perso"
+fi
+
+export MESSAGE
+
+timeshift --create --btrfs --yes --scripted --comments "${MESSAGE}"
+echo -e $GREEN "The snapshot has been taken."
+}
+
+delete() {
+timeshift --delete --snapshot-device "${DEVICE}"
+echo -e $GREEN "The snapshot has been deleted."
+}
+
+delete-all() {
+timeshift --delete-all --snapshot-device "${DEVICE}"
+echo -e $GREEN "All snapshots has been deleted."
+}
+
+list() {
+timeshift --list --snapshot-device "${DEVICE}"
+}
+
+ARGS=$(getopt -o cdalhm: -l create,delete,delete-all,list,help,message: -- "$@" 2> /dev/null)
+eval set -- "$ARGS"
+
+if [[ "$ARGS" = " --" ]]; then
+	help
+fi
+
+while true
+do
+	case "$1" in
+		-h|--help) help; exit 0; ;;
+		-m|--message) MESSAGE=$2; export MESSAGE; shift 2; ;;
+		-c|--create) MESSAGE=`echo $MESSAGE`; if [ -z "$MESSAGE" ]; then MESSAGE=$3; fi; create; exit 0; ;;
+		-d|--delete) delete; exit 0; ;;
+		-a|--delete-all) delete-all; exit 0; ;;
+		-l|--list) list; exit 0; ;;
+		--) shift; break; ;;
+		 *) echo -e $RED "Internal error, unhandled option: $1"; exit 1; ;;
+	esac
+done

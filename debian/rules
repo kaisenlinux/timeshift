@@ -11,3 +11,4 @@ execute_after_dh_auto_install:
 	rm -rf $(CURDIR)/debian/timeshift/usr/share/applications
 	rm -f $(CURDIR)/debian/timeshift/etc/timeshift/timeshift.json
 	cp -rf $(CURDIR)/debian/etc/timeshift/ $(CURDIR)/debian/timeshift/etc/
+	install -p -m 0755 $(CURDIR)/debian/kaisen-snapshot $(CURDIR)/debian/timeshift/usr/sbin/

@@ -1,3 +1,9 @@
+timeshift (24.06.3-2kaisen) kaisen-packages; urgency=medium
+
+  * Add the kaisen-snapshot command (Timeshift BASH wrapper)
+
+ -- Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>  Wed, 02 Oct 2024 18:15:27 +0200
+
 timeshift (24.06.3-1kaisen) kaisen-packages; urgency=medium
 
   * Import the new upstream release
