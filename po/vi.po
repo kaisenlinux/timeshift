@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2024-06-06 11:53+0100\n"
-"PO-Revision-Date: 2024-06-16 14:00+0000\n"
+"PO-Revision-Date: 2024-10-04 15:17+0000\n"
 "Last-Translator: thieninox <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2024-07-21 09:02+0000\n"
-"X-Generator: Launchpad (build bbfa2351d9d6a9ddfe262109428f7bf5516e65d1)\n"
+"X-Launchpad-Export-Date: 2025-01-06 12:00+0000\n"
+"X-Generator: Launchpad (build 6394e03793719e8d73f5a60b5439440e693c92f1)\n"
 
 #: src/AppConsole.vala:626
 #, c-format
@@ -708,7 +708,7 @@ msgstr "Không tìm thấy thư mục"
 
 #: src/Core/Main.vala:2380 src/Gtk/RestoreSummaryBox.vala:64
 msgid "Disclaimer"
-msgstr ""
+msgstr "Tuyên bố"
 
 #: src/Gtk/BackupDeviceBox.vala:127
 msgid "Disk"
@@ -716,7 +716,7 @@ msgstr "Ổ đĩa"
 
 #: src/Core/Main.vala:244
 msgid "Distribution"
-msgstr ""
+msgstr "Bản phân phối"
 
 #: src/Gtk/MainWindow.vala:1038
 msgid "Enable scheduled snapshots to protect your system"
@@ -724,7 +724,7 @@ msgstr "Kích hoạt bản sao lưu theo lịch để bảo vệ hệ thống c�
 
 #: src/Utility/Device.vala:1476
 msgid "Encrypted Device"
-msgstr ""
+msgstr "Thiết bị được mã hóa"
 
 #: src/Gtk/UsersBox.vala:232
 msgid "Encrypted Home Directory"
@@ -756,7 +756,7 @@ msgstr ""
 
 #: src/Gtk/RestoreDeviceBox.vala:520
 msgid "Error"
-msgstr ""
+msgstr "Lỗi"
 
 #: src/Gtk/RestoreWindow.vala:481
 msgid "Error running Rsync"
@@ -764,7 +764,7 @@ msgstr ""
 
 #: src/Gtk/BackupWindow.vala:82 src/Gtk/SetupWizardWindow.vala:99
 msgid "Estimate"
-msgstr ""
+msgstr "Ước tính"
 
 #: src/Gtk/EstimateBox.vala:56
 msgid "Estimating System Size..."
@@ -776,7 +776,7 @@ msgstr ""
 
 #: src/AppConsole.vala:398
 msgid "Examples"
-msgstr ""
+msgstr "Các ví dụ"
 
 #: src/Gtk/UsersBox.vala:132
 msgid "Exclude All Files"
@@ -816,7 +816,7 @@ msgstr ""
 
 #: src/Utility/TeeJee.FileSystem.vala:155
 msgid "Failed to copy file"
-msgstr ""
+msgstr "Gặp lỗi khi chép tập tin"
 
 #: src/Utility/TeeJee.FileSystem.vala:271
 #: src/Utility/TeeJee.FileSystem.vala:280

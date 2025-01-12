@@ -1,3 +1,10 @@
+timeshift (24.06.6-1kaisen) kaisen-packages; urgency=medium
+
+  * Import the 24.06.6 release
+  * Add the restore function to the kaisen-snapshot wrapper
+
+ -- Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>  Sun, 12 Jan 2025 05:20:17 +0200
+
 timeshift (24.06.3-2kaisen) kaisen-packages; urgency=medium
 
   * Add the kaisen-snapshot command (Timeshift BASH wrapper)

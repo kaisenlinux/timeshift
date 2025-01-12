@@ -24,6 +24,7 @@ echo -e "\e[1;32mKaisen Linux Timeshift snapshot wrapper
 	\e[1;35mList all snapshots\e[0;33m: \e[1;36mkaisen-snapshot \e[1;35m-l
         \e[1;35mDelete a snapshot\e[0;33m: \e[1;36mkaisen-snapshot \e[1;35m-d
         \e[1;35mDelete all snapshots\e[0;33m: \e[1;36m kaisen-snapshot \e[1;35m-a\e[0;33m
+        \e[1;35mRestore a snapshot\e[0;33m: \e[1;36m kaisen-snapshot \e[1;35m-r\e[0;33m
 
 \e[0;33mEXPLAINATION
 	Arguments can be used with this script:
@@ -33,6 +34,7 @@ echo -e "\e[1;32mKaisen Linux Timeshift snapshot wrapper
 	\e[1;35m-l\e[0;33m|\e[1;35m--list\e[0;33m: List all snapshots
 	\e[1;35m-d\e[0;33m|\e[1;35m--delete\e[0;33m: Delete a snapshot (will display the list of snapshots to select the snapshot to be deleted)
 	\e[1;35m-a\e[0;33m|\e[1;35m--delete-all\e[0;33m: Delete all snapshots (all snapshots will be automatically deleted)
+	\e[1;35m-r\e[0;33m|\e[1;35m--restore\e[0;33m: Restore a snapshot (will display the list of snapshots to select the snapshot to be restored)
 
 EXAMPLES
 	To create a snapshot with the default snapshot message: \e[1;36mkaisen-snapshot \e[1;35m-c\e[0;33m
@@ -40,6 +42,7 @@ EXAMPLES
 	To list all snapshots: \e[1;36mkaisen-snapshot \e[1;35m-l\e[0;33m
 	To delete a snapshot: \e[1;36mkaisen-snapshot \e[1;35m-d\e[0;33m
 	To delete all snapshots: \e[1;36m kaisen-snapshot \e[1;35m-a\e[0;33m
+	To restore a snapshot: \e[1;36m kaisen-snapshot \e[1;35m-r\e[0;33m
 "
 }
 
@@ -68,7 +71,11 @@ list() {
 timeshift --list --snapshot-device "${DEVICE}"
 }
 
-ARGS=$(getopt -o cdalhm: -l create,delete,delete-all,list,help,message: -- "$@" 2> /dev/null)
+restore() {
+timeshift --restore --snapshot-device "${DEVICE}"
+}
+
+ARGS=$(getopt -o cdarlhm: -l create,delete,delete-all,restore,list,help,message: -- "$@" 2> /dev/null)
 eval set -- "$ARGS"
 
 if [[ "$ARGS" = " --" ]]; then
@@ -83,6 +90,7 @@ do
 		-c|--create) MESSAGE=`echo $MESSAGE`; if [ -z "$MESSAGE" ]; then MESSAGE=$3; fi; create; exit 0; ;;
 		-d|--delete) delete; exit 0; ;;
 		-a|--delete-all) delete-all; exit 0; ;;
+		-r|--restore) restore; exit 0; ;;
 		-l|--list) list; exit 0; ;;
 		--) shift; break; ;;
 		 *) echo -e $RED "Internal error, unhandled option: $1"; exit 1; ;;
